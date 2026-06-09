@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Wake Me At</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --bg-main: #f9fafb;
+            --bg-card: #ffffff;
+            --border: #e5e7eb;
+            --accent-bg: #eff6ff;
+            --accent-border: #bfdbfe;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+        }
+        h1 {
+            font-size: 2.25rem;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+        h2 {
+            font-size: 1.4rem;
+            color: #111827;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        p, li {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .highlight-box {
+            background-color: var(--accent-bg);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .highlight-box p {
+            margin: 0;
+            color: #1e40af;
+            font-weight: 500;
+        }
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9em;
+            color: #db2777;
+        }
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Privacy Policy</h1>
+    <div class="subtitle">Effective Date: June 2026 | Last Updated: June 2026</div>
+
+    <p>Wake Me At ("we," "our," or "us") provides the Wake Me At mobile application. We are deeply committed to maintaining clear, strict, and absolute privacy safeguards regarding your mobile device data. This document outlines our offline-first data architecture and internet usage clarity.</p>
+
+    <div class="highlight-box">
+        <p><strong>Strict Network Boundary & Offline Operation:</strong> Wake Me At operates entirely offline. The application does NOT use or maintain any application servers, user management APIs, database cloud syncs, or remote analytics platforms. The only operational requirement for network communication is fetching visual map layers via our mapping layout toolkit.</p>
+    </div>
+
+    <h2>1. Internet & Map Tile Data Footprint</h2>
+    <p>The application requests network access strictly to stream interactive interface visuals:</p>
+    <ul>
+        <li><strong>Map Interface Interaction:</strong> When viewing the tracking view or configuring coordinates, the app utilizes the device's internet connection solely to download underlying map layout configurations and regional tiles.</li>
+        <li><strong>No Payload Transmission:</strong> Your designated destinations, coordinates, radius choices, and telemetry data are never attached to these requests. The internet stream is exclusively a one-way download of terrain graphics.</li>
+    </ul>
+
+    <h2>2. Background Location Scope</h2>
+    <p>Wake Me At is a proximity arrival companion built to trigger high-priority alerts when entering safety circles.</p>
+    <ul>
+        <li><strong>Background Execution:</strong> To trigger alerts when your device screen is off or another app is active, the app requires location access in the background. This background monitoring uses the device's native low-power hardware geofencing processors.</li>
+        <li><strong>On-Device Calculations:</strong> 100% of location matching, proximity math, coordinate testing, and task orchestration runs locally on the device's thread via <code>expo-location</code>. Absolutely zero real-time coordinates leave the sandbox or stream to public servers.</li>
+    </ul>
+
+    <h2>3. Local Storage Sandboxing</h2>
+    <p>All application memory remains inside the localized execution directory:</p>
+    <ul>
+        <li><strong>Data Isolation:</strong> Custom locations, configured radii, and active target statuses are serialized directly into an on-device local instances storage model powered by a secure, compiled <code>MMKV</code> key-value cache layer (<code>wake-me-at-storage</code>).</li>
+        <li><strong>Inter-process Communication:</strong> Ephemeral state transfers between active background listener threads and the user interface happen inside localized device runtime buffers.</li>
+    </ul>
+
+    <h2>4. Third-Party Kits & SDK Boundaries</h2>
+    <p>Our client interface utilizes specific developer-vetted SDK architectures to display interface elements. These libraries handle data as described below:</p>
+    <ul>
+        <li><strong>Mapbox SDK (<code>@rnmapbox/maps</code>):</strong> Handles rendering interactive base maps. Mapbox processes standard telemetry metrics and IP endpoints strictly to authorize, rate-limit, and deliver graphic map tiles under their baseline privacy provisions.</li>
+        <li><strong>Notifee SDK:</strong> Used to render critical alerts, audio actions, and status updates locally on the device. Notifee functions completely offline.</li>
+    </ul>
+
+    <h2>5. Children's Privacy</h2>
+    <p>Wake Me At is explicitly designed as a general utility tool. It does not target, collect, or address personal identifier footprints from individuals under thirteen (13) years of age. Because the application uses an offline-first configuration with zero network storage, no children's tracking parameters can be gathered or sent to third parties.</p>
+
+    <h2>6. Direct Privacy Contact</h2>
+    <p>For questions or verification regarding our architecture, please contact us directly via email at: <strong>your-email@example.com</strong></p>
+
+    <div class="footer">
+        © 2026 Wake Me At. Built securely.
+    </div>
+</div>
+
+</body>
+</html>
